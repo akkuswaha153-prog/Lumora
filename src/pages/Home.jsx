@@ -11,7 +11,7 @@ import { FREE_DAILY_LIMIT } from '../utils/constants';
 const Home = () => {
   const navigate = useNavigate();
   const [usageCount, setUsageCount] = useState(0);
-
+import AdsterraBanner from '../components/features/AdsterraBanner';
   useEffect(() => {
     const fetchUsage = async () => {
       const today = new Date().toISOString().split('T')[0];
@@ -49,7 +49,23 @@ const Home = () => {
           Find clarity through private, structured reflection.
         </motion.p>
       </header>
+// ... Line 48 tak purana code ...
+      <header className="home-hero">
+        <motion.h2 variants={itemVariants} className="welcome-text">
+          Good day, <span className="text-gradient">Seeker</span>
+        </motion.h2>
+        <motion.p variants={itemVariants} className="subtitle">
+          Find clarity through private, structured reflection.
+        </motion.p>
+      </header>
 
+      {/* --- YAHAN PASTE KAREIN (Approx Line 58) --- */}
+      <AdsterraBanner /> 
+      {/* ------------------------------------------ */}
+
+      <GlassCard delay={0.2} onClick={() => navigate('/reflect')}>
+        <div className="cta-content">
+// ... baaki ka code ...
       <GlassCard delay={0.2} onClick={() => navigate('/reflect')}>
         <div className="cta-content">
           <div className="cta-text">
