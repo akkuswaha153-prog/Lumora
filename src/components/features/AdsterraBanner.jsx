@@ -1,20 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 
-const AdsterraBanner = () => {
+const AdUnit = () => {
   const adRef = useRef(null);
 
   useEffect(() => {
-    // Adsterra script ko load karne ka logic
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
+    // Adsterra Configuration
+    const adKey = "YOUR_ADSTERRA_KEY_HERE"; // Apni key yahan daalein
     
-    // YAHAN APNA ADSTERRA SCRIPT KEY DALEN (Jo aapke panel me milega)
-    // Example: atOptions = { 'key' : 'your_key_here', 'format' : 'iframe', ... }
     const conf = document.createElement('script');
     conf.innerHTML = `
       atOptions = {
-        'key' : 'YOUR_ADSTERRA_UNIT_KEY_HERE',
+        'key' : '${adKey}',
         'format' : 'iframe',
         'height' : 50,
         'width' : 320,
@@ -22,34 +18,25 @@ const AdsterraBanner = () => {
       };
     `;
     
-    script.src = `//www.highperformanceformat.com/YOUR_ADSTERRA_UNIT_KEY_HERE/invoke.js`;
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = `//www.highperformanceformat.com/${adKey}/invoke.js`;
 
     if (adRef.current) {
+      adRef.current.innerHTML = ''; // Clear previous if any
       adRef.current.appendChild(conf);
       adRef.current.appendChild(script);
     }
   }, []);
 
   return (
-    <div className="ad-container" ref={adRef}>
-      <p className="ad-label">Advertisement</p>
-      <style jsx>{`
-        .ad-container {
-          margin: 15px auto;
-          text-align: center;
-          min-height: 60px;
-          width: 100%;
-          overflow: hidden;
-        }
-        .ad-label {
-          font-size: 10px;
-          color: #475569;
-          margin-bottom: 4px;
-          text-transform: uppercase;
-        }
-      `}</style>
+    <div style={{ margin: '20px auto', textAlign: 'center', minHeight: '70px' }}>
+      <span style={{ fontSize: '10px', color: '#64748b', display: 'block', marginBottom: '5px' }}>
+        ADVERTISEMENT
+      </span>
+      <div ref={adRef}></div>
     </div>
   );
 };
 
-export default AdsterraBanner;
+export default AdUnit;
